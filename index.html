@@ -2,770 +2,425 @@
 <html lang="en">
 
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9726052708182677"
-     crossorigin="anonymous"></script>
-    <meta name="google-adsense-account" content="ca-pub-9726052708182677">
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
-    <title>MCQ Quiz — CSV with Explanations</title>
-    <meta name="description"
-        content="Mobile-first MCQ quiz that accepts a CSV of questions (with explanations) and runs smoothly on phones and tablets." />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>English MCQ Quiz — Advanced Version</title>
+
     <style>
+        /* -----------------------------
+           THEME VARIABLES
+        -----------------------------*/
         :root {
             --bg: #0f1724;
+            --card: #0b1220;
+            --text: #e6eef8;
             --muted: #94a3b8;
             --accent: #7c3aed;
-            --accent-2: #06b6d4;
-            --glass: rgba(255, 255, 255, 0.04);
-            --card-radius: 14px;
+            --accent2: #06b6d4;
             --success: #10b981;
             --danger: #ef4444;
-            font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+            --glass: rgba(255, 255, 255, 0.02);
+            --radius: 14px;
+            --max-width: 920px;
+            --font-base: 22px;
+            --transition: 0.35s ease;
+        }
+
+        /* LIGHT THEME */
+        html.light {
+            --bg: #f3f6ff;
+            --card: #ffffff;
+            --text: #101827;
+            --muted: #4b5563;
+            --glass: rgba(0, 0, 0, 0.04);
         }
 
         * {
-            box-sizing: border-box
-        }
-
-        html,
-        body {
-            height: 100%
+            box-sizing: border-box;
         }
 
         body {
             margin: 0;
-            background:
-                radial-gradient(1200px 600px at 10% 10%, rgba(124, 58, 237, 0.12), transparent),
-                radial-gradient(900px 500px at 90% 90%, rgba(6, 182, 212, 0.06), transparent),
-                var(--bg);
-            color: #e6eef8;
-            padding: 16px;
+            padding: 14px;
+            background: var(--bg);
+            color: var(--text);
+            font-family: Inter, system-ui, sans-serif;
+            font-size: var(--font-base);
+            display: flex;
+            justify-content: center;
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .shell {
+            width: 100%;
+            max-width: var(--max-width);
             display: flex;
             flex-direction: column;
             gap: 14px;
-            min-height: 100vh;
         }
 
         header {
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
             gap: 12px;
-            flex-wrap: wrap
         }
 
         .brand {
             display: flex;
             gap: 12px;
-            align-items: center
+            align-items: center;
         }
 
         .logo {
-            width: 52px;
-            height: 52px;
+            width: 56px;
+            height: 56px;
             border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent-2));
+            background: linear-gradient(135deg, var(--accent), var(--accent2));
             display: grid;
             place-items: center;
-            font-weight: 800
+            font-weight: 800;
+            color: #fff;
         }
 
         h1 {
-            font-size: 16px;
-            margin: 0
+            margin: 0;
+            font-size: 20px;
         }
 
-        .lead {
+        p.lead {
             margin: 0;
             color: var(--muted);
-            font-size: 13px
-        }
-
-        .controls {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap
+            font-size: 14px;
         }
 
         .btn {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), transparent);
-            border: 1px solid rgba(255, 255, 255, 0.04);
             padding: 10px 14px;
             border-radius: 12px;
-            color: inherit;
+            border: none;
             font-weight: 700;
             cursor: pointer;
-            display: inline-flex;
-            gap: 8px;
-            align-items: center
-        }
-
-        .btn.primary {
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            color: #051023;
-            border: none;
-            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.18)
+            background: linear-gradient(90deg, var(--accent), var(--accent2));
+            color: #fff;
+            transition: 0.25s ease;
         }
 
         .btn.ghost {
             background: transparent;
-            border: 1px dashed rgba(255, 255, 255, 0.04)
+            border: 1px solid var(--glass);
+            color: var(--muted);
         }
 
         input[type=file] {
-            display: none
+            display: none;
         }
 
         main {
-            flex: 1;
             display: flex;
             flex-direction: column;
-            gap: 14px
+            gap: 12px;
         }
 
-        .file-drop {
+        .card {
+            background: var(--card);
+            border-radius: 16px;
+            padding: 16px;
+            border: 1px solid var(--glass);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
+            transition: background var(--transition), color var(--transition);
+        }
+
+        .drop {
             min-height: 110px;
-            border-radius: var(--card-radius);
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
-            border: 1px solid rgba(255, 255, 255, 0.03);
+            border-radius: var(--radius);
+            background: var(--glass);
+            border: 1px dashed var(--glass);
             display: flex;
             align-items: center;
             justify-content: center;
-            flex-direction: column;
-            padding: 16px;
+            padding: 12px;
+            color: var(--muted);
             text-align: center;
-            color: var(--muted)
-        }
-
-        .small {
-            font-size: 12px;
-            color: var(--muted)
-        }
-
-        .quiz-card {
-            background: linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent);
-            border-radius: 16px;
-            padding: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.04);
-            box-shadow: 0 12px 30px rgba(2, 6, 23, 0.6);
-            display: flex;
-            flex-direction: column;
-            gap: 12px
-        }
-
-        .q-top {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap
-        }
-
-        .progress {
-            height: 10px;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.04);
-            overflow: hidden;
-            flex: 0 1 220px
-        }
-
-        .progress>i {
-            display: block;
-            height: 100%;
-            background: linear-gradient(90deg, var(--accent), var(--accent-2));
-            width: 0%;
-            transition: width 600ms cubic-bezier(.2, .9, .2, 1)
         }
 
         .question {
-            font-size: 18px;
-            margin: 0;
-            padding: 4px 0
+            font-size: 28px;
+            margin: 0 0 10px 0;
         }
 
         .options {
             display: grid;
-            gap: 10px
+            gap: 10px;
         }
 
-        .option {
+        .opt {
+            padding: 14px;
+            border-radius: 12px;
+            background: var(--glass);
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.25s ease;
+        }
+
+        .opt:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        .opt.correct {
+            border-color: var(--success);
+            background: rgba(16, 185, 129, 0.15);
+        }
+
+        .opt.wrong {
+            border-color: var(--danger);
+            background: rgba(239, 68, 68, 0.15);
+        }
+
+        /* POPUP */
+        .overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.55);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 50;
+        }
+
+        .modal {
+            width: 90%;
+            max-width: 480px;
+            background: var(--card);
+            padding: 18px;
+            border-radius: 16px;
+            border: 1px solid var(--glass);
+        }
+
+        .modal .status {
+            font-size: 26px;
+            font-weight: 800;
+        }
+
+        .explain {
+            margin-top: 10px;
+            background: var(--glass);
             padding: 12px;
             border-radius: 12px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
-            background: rgba(255, 255, 255, 0.01);
-            cursor: pointer;
-            transition: transform .12s ease, box-shadow .12s ease
-        }
-
-        .option:active {
-            transform: translateY(1px)
-        }
-
-        .option.selected {
-            box-shadow: 0 10px 30px rgba(7, 10, 20, 0.6);
-            border-color: rgba(255, 255, 255, 0.06)
-        }
-
-        .option.correct {
-            outline: 3px solid rgba(16, 185, 129, 0.12);
-            border-color: var(--success);
-            box-shadow: 0 14px 34px rgba(16, 185, 129, 0.06)
-        }
-
-        .option.wrong {
-            outline: 3px solid rgba(239, 68, 68, 0.08);
-            border-color: var(--danger);
-            opacity: 0.94
-        }
-
-        .explanation-box {
-            margin-top: 8px;
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02);
-            font-size: 13px;
             color: var(--muted);
-            display: none
-        }
-
-        .explanation-box.show {
-            display: block;
-            color: #eafaf0;
-            border-left: 4px solid rgba(16, 185, 129, 0.14)
-        }
-
-        .footer-actions {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            justify-content: space-between;
-            flex-wrap: wrap
-        }
-
-        .results {
-            display: none;
-            flex-direction: column;
-            gap: 12px
-        }
-
-        .results.show {
-            display: flex
-        }
-
-        .review-list {
-            display: flex;
-            flex-direction: column;
-            gap: 8px
-        }
-
-        .review-item {
-            padding: 10px;
-            border-radius: 10px;
-            background: rgba(255, 255, 255, 0.02)
-        }
-
-        @media (max-width:420px) {
-            body {
-                padding: 10px
-            }
-
-            .question {
-                font-size: 16px
-            }
-
-            .logo {
-                width: 44px;
-                height: 44px
-            }
-
-            .btn {
-                padding: 9px 12px
-            }
-        }
-
-        .fade-in {
-            animation: fadeIn .55s both
-        }
-
-        @keyframes fadeIn {
-            from {
-                opacity: 0;
-                transform: translateY(8px)
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0)
-            }
         }
 
         footer {
-            opacity: 0.9;
-            color: var(--muted);
+            text-align: center;
             font-size: 12px;
-            text-align: center
+            color: var(--muted);
+            margin-top: 20px;
+        }
+
+        @media (max-width:450px) {
+            :root {
+                --font-base: 26px;
+            }
+
+            .question {
+                font-size: 26px;
+            }
+
+            .opt {
+                font-size: 22px;
+                padding: 16px;
+            }
+
+            .modal .status {
+                font-size: 22px;
+            }
         }
     </style>
 </head>
 
 <body>
-    <header>
-        <div class="brand">
-            <div class="logo">QA</div>
-            <div>
-                <h1>English MCQ — CSV Quiz</h1>
-                <p class="lead">Upload a CSV (question,opt1,opt2,opt3,opt4,answer,explanation) and take the quiz.</p>
-            </div>
-        </div>
 
-        <div class="controls">
-            <label class="btn" id="load-sample-btn" title="Load sample CSV into the player">Load sample</label>
-            <label class="btn ghost" id="file-label">Upload CSV<input id="file-input" type="file"
-                    accept=".csv,text/csv" /></label>
-            <button class="btn primary" id="start-btn">Start Quiz</button>
-        </div>
-    </header>
+    <div class="shell">
 
-    <main>
-        <div class="file-drop" id="dropzone">
-            <div style="font-weight:700;font-size:18px">Drop CSV here</div>
-            <div class="small">Or tap <strong>Upload CSV</strong>. CSV columns:
-                <code>question,opt1,opt2,opt3,opt4,answer,explanation</code> (explanation optional)</div>
-        </div>
-
-        <div class="quiz-card fade-in" id="quiz" style="display:none">
-            <div class="q-top">
+        <header>
+            <div class="brand">
+                <div class="logo">QA</div>
                 <div>
-                    <div class="small">Question <strong id="q-index">0</strong> / <span id="q-total">0</span></div>
-                    <div class="progress" aria-hidden="true" style="margin-top:8px"><i id="progress-bar"></i></div>
-                </div>
-                <div style="text-align:right">
-                    <div class="small">Time</div>
-                    <div id="timer" class="small">00:00</div>
+                    <h1>English MCQ Quiz</h1>
+                    <p class="lead">Upload CSV (question,opt1,opt2,opt3,opt4,answer,explanation)</p>
                 </div>
             </div>
 
-            <div>
-                <h2 class="question" id="question-text">Question will appear here</h2>
+            <div class="controls">
+                <label class="btn ghost">Upload CSV
+                    <input id="fileInput" type="file" accept=".csv,text/csv">
+                </label>
+
+                <button class="btn" id="startBtn">Start</button>
+
+                <!-- THEME TOGGLE -->
+                <button class="btn ghost" id="themeToggle">🌙</button>
+            </div>
+        </header>
+
+        <main>
+            <div class="card">
+                <div class="drop" id="dropzone">
+                    Drop CSV here or tap <strong>Upload CSV</strong>
+                </div>
             </div>
 
-            <div class="options" id="options"></div>
-
-            <div class="explanation-box" id="explanation-box"></div>
-
-            <div class="footer-actions">
-                <div style="display:flex;gap:8px;align-items:center">
-                    <button class="btn ghost" id="prev-btn">◀ Prev</button>
-                    <button class="btn ghost" id="next-btn">Next ▶</button>
+            <div class="card" id="quizCard" style="display:none">
+                <div class="meta">
+                    <div>Question <strong id="qIndex">0</strong> / <span id="qTotal">0</span></div>
                 </div>
-                <div style="display:flex;align-items:center;gap:8px">
-                    <div class="small" id="feedback"></div>
-                    <button class="btn primary" id="finish-btn">Finish</button>
+
+                <h2 class="question" id="questionText">Question will appear here</h2>
+                <div class="options" id="options"></div>
+
+                <div style="margin-top:12px; display:flex; justify-content:space-between;">
+                    <button class="btn ghost" id="prevBtn">Prev</button>
+                    <button class="btn ghost" id="nextBtn">Next</button>
+                    <button class="btn" id="finishBtn">Finish</button>
                 </div>
             </div>
 
-            <div class="small" style="text-align:center">Tip: swipe left/right on touch devices to navigate</div>
+            <div class="card" id="resultCard" style="display:none">
+                <h3>Your Score</h3>
+                <div id="scoreDisplay" style="font-size:24px; font-weight:700;">0 / 0</div>
+            </div>
+
+        </main>
+
+        <footer>English MCQ Quiz • Mobile Friendly</footer>
+    </div>
+
+    <!-- Popup -->
+    <div class="overlay" id="overlay">
+        <div class="modal">
+            <div class="status" id="modalStatus"></div>
+            <div class="explain" id="modalExplanation"></div>
+            <div style="margin-top:12px; text-align:right;">
+                <button class="btn" id="modalNext">Next Question</button>
+            </div>
         </div>
-
-        <div class="quiz-card results" id="results-card">
-            <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap">
-                <div>
-                    <div class="small">Your Score</div>
-                    <div class="score" id="score-val" style="font-size:24px;font-weight:800">0 / 0</div>
-                </div>
-                <div style="text-align:right">
-                    <div class="small">Accuracy</div>
-                    <div id="accuracy" class="score" style="font-size:20px">0%</div>
-                </div>
-            </div>
-
-            <div>
-                <div class="small">Review (tap an item to jump)</div>
-                <div class="review-list" id="review-list"></div>
-            </div>
-
-            <div
-                style="display:flex;gap:8px;justify-content:space-between;align-items:center;margin-top:8px;flex-wrap:wrap">
-                <button class="btn" id="retry-btn">Retry</button>
-                <div style="display:flex;gap:8px">
-                    <button class="btn" id="export-btn">Export Results (CSV)</button>
-                    <button class="btn ghost" id="new-upload-btn">Upload new CSV</button>
-                </div>
-            </div>
-        </div>
-
-        <details class="quiz-card" open id="help-card" style="margin-top:6px">
-            <summary style="cursor:pointer">How to format your CSV (click to expand)</summary>
-            <div style="margin-top:8px;display:flex;flex-direction:column;gap:8px">
-                <div class="small">Required headers: <code>question,opt1,opt2,opt3,opt4,answer,explanation</code> —
-                    answer should be one of opt1..opt4 or 1-4. Explanation is optional.</div>
-                <textarea id="sample-csv" rows="6"
-                    style="width:100%;border-radius:10px;padding:8px;background:transparent;border:1px solid rgba(255,255,255,0.03);color:inherit">question,opt1,opt2,opt3,opt4,answer,explanation
-What is the antonym of 'hot'?,cold,warm,boiling,chilly,cold,The opposite of hot is cold.
-Choose the correct article: "I saw ___ elephant.",a,an,the,no article,an,Use 'an' before vowel sounds.
-Which is a synonym of 'happy'?,sad,angry,joyful,boring,joyful,Synonym for happy is joyful.</textarea>
-                <div style="display:flex;gap:8px">
-                    <button class="btn" id="load-sample-2">Load sample above</button>
-                    <div class="small">You can paste your CSV and click Load sample.</div>
-                </div>
-            </div>
-        </details>
-
-    </main>
-
-    <footer>Single-file offline-capable quiz • Touch friendly • Explanations shown after answering</footer>
+    </div>
 
     <script>
-        /* Utilities */
-        const $ = (s, el = document) => el.querySelector(s);
-        const $$ = (s, el = document) => Array.from(el.querySelectorAll(s));
+        /* THEME TOGGLE */
+        const themeToggle = document.getElementById("themeToggle");
+        function updateThemeIcon() {
+            themeToggle.textContent = document.documentElement.classList.contains("light") ? "🌙" : "☀️";
+        }
+        themeToggle.addEventListener("click", () => {
+            document.documentElement.classList.toggle("light");
+            updateThemeIcon();
+        });
+        updateThemeIcon();
+
+        /* CSV Handling */
+        const $ = (s) => document.querySelector(s);
 
         let questions = [];
-        let state = { idx: 0, answers: [], startedAt: null };
-        let timerInterval = null;
-        let hasExplanation = false;
+        let state = { idx: 0 };
 
-        const fileInput = $('#file-input');
-        const dropzone = $('#dropzone');
-        const startBtn = $('#start-btn');
-        const loadSampleBtn = $('#load-sample-btn');
-        const loadSample2 = $('#load-sample-2');
-        const sampleArea = $('#sample-csv');
-        const qTotalEl = $('#q-total');
-        const qIndexEl = $('#q-index');
-        const progressBar = $('#progress-bar');
-        const optionsEl = $('#options');
-        const questionTextEl = $('#question-text');
-        const explanationBox = $('#explanation-box');
+        const fileInput = $("#fileInput");
+        const dropzone = $("#dropzone");
+        const quizCard = $("#quizCard");
+        const resultCard = $("#resultCard");
+        const questionText = $("#questionText");
+        const optionsEl = $("#options");
+        const qIndex = $("#qIndex");
+        const qTotal = $("#qTotal");
 
-        function safeSplitCSVLine(line) {
-            // Very lightweight CSV split: handles commas inside quotes
-            const parts = [];
-            let cur = '', inQuotes = false;
-            for (let i = 0; i < line.length; i++) {
-                const ch = line[i];
-                if (ch === '"') { inQuotes = !inQuotes; continue; }
-                if (ch === ',' && !inQuotes) { parts.push(cur); cur = ''; } else cur += ch;
-            }
-            parts.push(cur);
-            return parts.map(s => s.trim());
+        const overlay = $("#overlay");
+        const modalStatus = $("#modalStatus");
+        const modalExplanation = $("#modalExplanation");
+        const modalNext = $("#modalNext");
+
+        fileInput.addEventListener("change", async (e) => {
+            const text = await e.target.files[0].text();
+            loadCSV(text);
+        });
+
+        dropzone.addEventListener("dragover", (e) => e.preventDefault());
+        dropzone.addEventListener("drop", async (e) => {
+            e.preventDefault();
+            const text = await e.dataTransfer.files[0].text();
+            loadCSV(text);
+        });
+
+        function loadCSV(text) {
+            const rows = text.trim().split("\n").map(r => r.split(","));
+            questions = rows.slice(1).map(r => ({
+                question: r[0],
+                options: [r[1], r[2], r[3], r[4]],
+                answer: r[5],
+                explanation: r[6]
+            }));
+
+            qTotal.textContent = questions.length;
+            quizCard.style.display = "block";
+            resultCard.style.display = "none";
+            render();
         }
 
-        function parseCSV(text) {
-            if (!text) return [];
-            const rows = text.split(/\r?\n/).map(r => r.trim()).filter(r => r.length > 0);
-            if (rows.length === 0) return [];
-            const headers = safeSplitCSVLine(rows[0]).map(h => h.toLowerCase());
-            const data = [];
-            hasExplanation = false;
-            for (let i = 1; i < rows.length; i++) {
-                const cols = safeSplitCSVLine(rows[i]);
-                // Map header -> value
-                const rowObj = {};
-                for (let j = 0; j < headers.length; j++) {
-                    rowObj[headers[j]] = (cols[j] || '').trim();
-                }
-                // Normalize fields (support multiple header names)
-                const qText = rowObj['question'] || rowObj['q'] || rowObj['prompt'] || '';
-                const opt1 = rowObj['opt1'] || rowObj['option1'] || rowObj['a'] || '';
-                const opt2 = rowObj['opt2'] || rowObj['option2'] || rowObj['b'] || '';
-                const opt3 = rowObj['opt3'] || rowObj['option3'] || rowObj['c'] || '';
-                const opt4 = rowObj['opt4'] || rowObj['option4'] || rowObj['d'] || '';
-                let ans = (rowObj['answer'] || rowObj['correct'] || '').trim();
-                const expl = (rowObj['explanation'] || rowObj['explain'] || rowObj['explanations'] || '').trim();
-                if (expl) hasExplanation = true;
-                const opts = [opt1, opt2, opt3, opt4];
-                if (/^[1-4]$/.test(ans)) {
-                    const idx = parseInt(ans, 10) - 1;
-                    ans = opts[idx] || ans;
-                }
-                data.push({
-                    question: qText,
-                    options: opts,
-                    answer: ans,
-                    explanation: expl
-                });
-            }
-            // filter out invalid rows
-            return data.filter(q => q.question && q.options.some(o => o));
-        }
+        function render() {
+            const q = questions[state.idx];
+            qIndex.textContent = state.idx + 1;
+            questionText.textContent = q.question;
+            optionsEl.innerHTML = "";
 
-        function loadQuestions(qs) {
-            questions = qs.slice();
-            state = { idx: 0, answers: Array(qs.length).fill(null), startedAt: Date.now() };
-            qTotalEl.textContent = qs.length;
-            $('#quiz').style.display = qs.length ? 'flex' : 'none';
-            $('#results-card').classList.remove('show');
-            renderQuestion();
-            resetTimer();
-            startTimer();
-            // autosave
-            saveState();
-        }
-
-        function renderQuestion() {
-            const i = state.idx;
-            const q = questions[i];
-            if (!q) return;
-            qIndexEl.textContent = i + 1;
-            questionTextEl.textContent = q.question;
-            optionsEl.innerHTML = '';
-            explanationBox.classList.remove('show');
-            explanationBox.innerHTML = '';
-            q.options.forEach((opt, j) => {
-                if (!opt) return;
-                const div = document.createElement('div');
-                div.className = 'option fade-in';
-                div.tabIndex = 0;
-                div.dataset.index = j;
-                div.innerHTML = `<div style="display:flex;justify-content:space-between;align-items:center"><div><strong>${String.fromCharCode(65 + j)}</strong> &nbsp; <span style="opacity:.95">${escapeHtml(opt)}</span></div></div>`;
-                div.addEventListener('click', () => selectOption(j));
-                div.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') selectOption(j); });
+            q.options.forEach(opt => {
+                const div = document.createElement("div");
+                div.className = "opt";
+                div.textContent = opt;
+                div.onclick = () => onSelect(opt);
                 optionsEl.appendChild(div);
             });
-            updateSelectedUI(false);
-            updateProgress();
-            $('#feedback').textContent = '';
-            // focus first option for accessibility
-            setTimeout(() => { const first = $('#options .option'); if (first) first.focus(); }, 50);
         }
 
-        function selectOption(optIndex) {
-            const cur = questions[state.idx];
-            state.answers[state.idx] = cur.options[optIndex];
-            updateSelectedUI(true);
-            showExplanationForCurrent();
-            saveState();
-            // advance after a short delay
-            setTimeout(() => {
-                if (state.idx < questions.length - 1) {
-                    state.idx++; renderQuestion();
-                } else {
-                    showResults();
-                }
-            }, 5000);
+        function onSelect(opt) {
+            const q = questions[state.idx];
+            let correct = opt === q.answer;
+
+            modalStatus.textContent = correct ? "Correct!" : "Incorrect";
+            modalExplanation.textContent = q.explanation || "No explanation available.";
+
+            overlay.style.display = "flex";
         }
 
-        function showExplanationForCurrent() {
-            const cur = questions[state.idx];
-            if (!cur) return;
-            const correct = cur.answer;
-            // show explanation if available
-            if (hasExplanation && cur.explanation) {
-                explanationBox.innerHTML = `<strong>Explanation:</strong> ${escapeHtml(cur.explanation)}`;
-                explanationBox.classList.add('show');
+        modalNext.onclick = () => {
+            overlay.style.display = "none";
+            next();
+        };
+
+        function next() {
+            if (state.idx < questions.length - 1) {
+                state.idx++;
+                render();
             } else {
-                explanationBox.classList.remove('show');
-                explanationBox.innerHTML = '';
-            }
-            // mark options correct/wrong
-            const opts = $$('#options .option');
-            opts.forEach(o => o.classList.remove('correct', 'wrong', 'selected'));
-            opts.forEach(o => {
-                const txt = questions[state.idx].options[o.dataset.index];
-                if (txt === state.answers[state.idx]) o.classList.add('selected');
-                if (txt === correct) o.classList.add('correct');
-                if (txt === state.answers[state.idx] && state.answers[state.idx] !== correct) o.classList.add('wrong');
-            });
-        }
-
-        function updateSelectedUI(showMark) {
-            const sel = state.answers[state.idx];
-            const opts = $$('#options .option');
-            opts.forEach(o => o.classList.remove('selected', 'correct', 'wrong'));
-            if (sel != null) {
-                opts.forEach(o => {
-                    if (questions[state.idx].options[o.dataset.index] === sel) o.classList.add('selected');
-                });
-                if (showMark) showExplanationForCurrent();
+                finish();
             }
         }
 
-        function updateProgress() {
-            const pct = Math.round((state.idx / (questions.length || 1)) * 100);
-            progressBar.style.width = Math.max(6, pct) + '%';
-        }
-
-        // Navigation
-        $('#next-btn').addEventListener('click', () => { if (state.idx < questions.length - 1) { state.idx++; renderQuestion(); } });
-        $('#prev-btn').addEventListener('click', () => { if (state.idx > 0) { state.idx--; renderQuestion(); } });
-        $('#finish-btn').addEventListener('click', showResults);
-        $('#retry-btn').addEventListener('click', () => { state.answers = Array(questions.length).fill(null); state.idx = 0; loadQuestions(questions); });
-        $('#new-upload-btn').addEventListener('click', () => { questions = []; state = {}; $('#quiz').style.display = 'none'; $('#results-card').classList.remove('show'); localStorage.removeItem('mcq_quiz_state'); });
-
-        function showResults() {
-            stopTimer();
-            const total = questions.length;
-            let correctCount = 0;
-            const reviewList = $('#review-list');
-            reviewList.innerHTML = '';
-            questions.forEach((q, i) => {
-                const isCorrect = q.answer && state.answers[i] === q.answer;
-                if (isCorrect) correctCount++;
-                const item = document.createElement('div');
-                item.className = 'review-item';
-                item.innerHTML = `
-          <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:10px">
-            <div style="max-width:72%"><strong>${i + 1}. ${escapeHtml(q.question)}</strong>
-              <div style="font-size:13px;color:var(--muted);margin-top:6px">
-                Your answer: <strong>${escapeHtml(state.answers[i] || '<Not answered>')}</strong><br/>
-                Correct: <strong>${escapeHtml(q.answer || '<Unknown>')}</strong>
-              </div>
-              ${q.explanation ? `<div style="margin-top:8px;font-size:13px;color:var(--muted)"><em>Explanation:</em> ${escapeHtml(q.explanation)}</div>` : ''}
-            </div>
-            <div style="text-align:right;font-weight:800">${isCorrect ? '✅' : '❌'}</div>
-          </div>
-        `;
-                item.addEventListener('click', () => {
-                    // jump to that question for review in main quiz area
-                    state.idx = i;
-                    $('#results-card').classList.remove('show');
-                    $('#quiz').style.display = 'flex';
-                    renderQuestion();
-                    showExplanationForCurrent();
-                });
-                reviewList.appendChild(item);
-            });
-            $('#score-val').textContent = `${correctCount} / ${total}`;
-            $('#accuracy').textContent = total ? Math.round((correctCount / total) * 100) + '%' : '0%';
-            $('#results-card').classList.add('show');
-            $('#results-card').scrollIntoView({ behavior: 'smooth' });
-        }
-
-        // File handling
-        fileInput.addEventListener('change', async (e) => {
-            const f = e.target.files[0]; if (!f) return;
-            const text = await f.text();
-            const parsed = parseCSV(text);
-            if (parsed.length === 0) return alert('No valid questions found. Ensure headers include question,opt1,opt2,opt3,opt4,answer (explanation optional).');
-            loadQuestions(parsed);
-        });
-
-        // Drag & drop
-        ['dragenter', 'dragover'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); dropzone.style.border = '1px solid rgba(255,255,255,0.08)'; }));
-        ['dragleave', 'drop'].forEach(ev => dropzone.addEventListener(ev, (e) => { e.preventDefault(); dropzone.style.border = 'none'; }));
-        dropzone.addEventListener('drop', async (e) => {
-            const f = e.dataTransfer.files && e.dataTransfer.files[0]; if (!f) return;
-            const text = await f.text();
-            const parsed = parseCSV(text);
-            if (parsed.length === 0) return alert('No valid questions found.');
-            loadQuestions(parsed);
-        });
-
-        // Load sample
-        loadSampleBtn.addEventListener('click', () => {
-            const sample = `question,opt1,opt2,opt3,opt4,answer,explanation
-What is the antonym of 'hot'?,cold,warm,boiling,chilly,cold,The direct opposite of hot is cold.
-Choose the correct article: "I saw ___ elephant.",a,an,the,no article,an,Use 'an' before vowel sounds.
-Which is a synonym of 'happy'?,sad,angry,joyful,boring,joyful,Joyful means happy.`;
-            const parsed = parseCSV(sample);
-            loadQuestions(parsed);
-        });
-        loadSample2.addEventListener('click', () => {
-            const txt = sampleArea.value.trim();
-            const parsed = parseCSV(txt);
-            if (parsed.length === 0) return alert('Sample CSV invalid or empty.');
-            loadQuestions(parsed);
-        });
-
-        // Start quiz button
-        startBtn.addEventListener('click', () => {
-            if (questions.length === 0) return alert('Please upload or load a sample CSV first.');
-            $('#quiz').style.display = 'flex';
-            renderQuestion();
-        });
-
-        // Export results
-        $('#export-btn').addEventListener('click', () => {
-            const rows = [['question', 'given_answer', 'correct_answer', 'isCorrect', 'explanation']];
-            questions.forEach((q, i) => {
-                const given = state.answers[i] || '';
-                const isOk = q.answer && given === q.answer ? 'true' : 'false';
-                rows.push([escapeCsv(q.question), escapeCsv(given), escapeCsv(q.answer || ''), isOk, escapeCsv(q.explanation || '')]);
-            });
-            const csv = rows.map(r => r.join(',')).join('\n');
-            const blob = new Blob([csv], { type: 'text/csv' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a'); a.href = url; a.download = 'quiz-results.csv'; document.body.appendChild(a); a.click(); a.remove(); URL.revokeObjectURL(url);
-        });
-
-        // Keyboard navigation
-        window.addEventListener('keydown', (e) => {
-            if (e.key === 'ArrowRight') $('#next-btn').click();
-            if (e.key === 'ArrowLeft') $('#prev-btn').click();
-        });
-
-        // Touch swipe
-        let touchStartX = 0, touchStartY = 0;
-        document.addEventListener('touchstart', (e) => { const t = e.touches[0]; touchStartX = t.clientX; touchStartY = t.clientY; });
-        document.addEventListener('touchend', (e) => {
-            const t = e.changedTouches[0]; const dx = t.clientX - touchStartX; const dy = t.clientY - touchStartY;
-            if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-                if (dx < 0) $('#next-btn').click(); else $('#prev-btn').click();
+        $("#nextBtn").onclick = next;
+        $("#prevBtn").onclick = () => {
+            if (state.idx > 0) {
+                state.idx--;
+                render();
             }
-        });
+        };
 
-        // Timer
-        function startTimer() {
-            const start = Date.now();
-            timerInterval = setInterval(() => {
-                const s = Math.floor((Date.now() - start) / 1000);
-                $('#timer').textContent = `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
-            }, 500);
+        $("#finishBtn").onclick = finish;
+
+        function finish() {
+            quizCard.style.display = "none";
+            resultCard.style.display = "block";
+
+            $("#scoreDisplay").textContent =
+                `Completed: ${questions.length} questions`;
         }
-        function stopTimer() { if (timerInterval) clearInterval(timerInterval); timerInterval = null; }
-        function resetTimer() { stopTimer(); $('#timer').textContent = '00:00'; }
-
-        // Autosave
-        function saveState() {
-            try {
-                localStorage.setItem('mcq_quiz_state', JSON.stringify({ questions, state, hasExplanation }));
-            } catch (e) { }
-        }
-        window.addEventListener('beforeunload', saveState);
-        window.addEventListener('load', () => {
-            try {
-                const raw = localStorage.getItem('mcq_quiz_state');
-                if (raw) {
-                    const obj = JSON.parse(raw);
-                    if (obj && obj.questions && obj.questions.length) {
-                        questions = obj.questions;
-                        state = obj.state || { idx: 0, answers: [] };
-                        hasExplanation = !!obj.hasExplanation;
-                        qTotalEl.textContent = questions.length;
-                        $('#quiz').style.display = 'flex';
-                        renderQuestion();
-                        startTimer();
-                    }
-                }
-            } catch (e) { }
-        });
-
-        // Helpers
-        function escapeHtml(s) {
-            if (!s) return '';
-            return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-        }
-        function escapeCsv(s) {
-            if (s == null) return '""';
-            const out = String(s).replace(/"/g, '""');
-            return `"${out}"`;
-        }
-
-        // Tiny CSV splitter helper is above (safeSplitCSVLine)
-
-        // Focus management when options change (accessibility)
-        const observer = new MutationObserver(() => { const opt = $('#options .option'); if (opt) opt.focus(); });
-        observer.observe(optionsEl, { childList: true });
-
-        // friendly initial animation hint
-        (function hint() { setTimeout(() => { if (!questions.length) dropzone.animate([{ opacity: 0.8 }, { opacity: 1 }], { duration: 1800, iterations: 2 }); }, 700); })();
     </script>
 </body>
 
-
 </html>
-
