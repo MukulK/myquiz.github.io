@@ -2,112 +2,86 @@
 <html lang="en">
 
 <head>
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <title>English MCQ Quiz</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>English MCQ Quiz — Advanced Version</title>
 
     <style>
-        /* -----------------------------
-           THEME VARIABLES
-        -----------------------------*/
+        /* --------------------------------------------------
+           PURE WHITE APPLE-STYLE THEME
+        --------------------------------------------------*/
         :root {
-            --bg: #0f1724;
-            --card: #0b1220;
-            --text: #e6eef8;
-            --muted: #94a3b8;
-            --accent: #7c3aed;
-            --accent2: #06b6d4;
-            --success: #10b981;
-            --danger: #ef4444;
-            --glass: rgba(255, 255, 255, 0.02);
-            --radius: 14px;
-            --max-width: 920px;
-            --font-base: 22px;
-            --transition: 0.35s ease;
-        }
-
-        /* LIGHT THEME */
-        html.light {
-            --bg: #f3f6ff;
+            --bg: #ffffff;
             --card: #ffffff;
-            --text: #101827;
-            --muted: #4b5563;
-            --glass: rgba(0, 0, 0, 0.04);
+            --text: #111111;
+            --muted: #777777;
+            --border: #e5e5e5;
+            --primary: #007aff;
+            --success: #34c759;
+            --danger: #ff3b30;
+            --radius: 14px;
+            --shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+            --maxw: 850px;
+            --font: 18px;
         }
 
         * {
             box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
             margin: 0;
-            padding: 14px;
+            padding: 16px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             background: var(--bg);
             color: var(--text);
-            font-family: Inter, system-ui, sans-serif;
-            font-size: var(--font-base);
+            font-size: var(--font);
             display: flex;
             justify-content: center;
-            transition: background var(--transition), color var(--transition);
         }
 
-        .shell {
+        .container {
             width: 100%;
-            max-width: var(--max-width);
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
+            max-width: var(--maxw);
         }
 
         header {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-wrap: wrap;
             gap: 12px;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 16px;
         }
 
         .brand {
             display: flex;
-            gap: 12px;
             align-items: center;
+            gap: 12px;
         }
 
         .logo {
-            width: 56px;
-            height: 56px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, var(--accent), var(--accent2));
+            width: 50px;
+            height: 50px;
+            border-radius: 14px;
+            background: var(--primary);
+            color: white;
             display: grid;
             place-items: center;
-            font-weight: 800;
-            color: #fff;
+            font-weight: 700;
+            font-size: 20px;
         }
 
         h1 {
             margin: 0;
-            font-size: 20px;
-        }
-
-        p.lead {
-            margin: 0;
-            color: var(--muted);
-            font-size: 14px;
-        }
-
-        .btn {
-            padding: 10px 14px;
-            border-radius: 12px;
-            border: none;
+            font-size: 22px;
             font-weight: 700;
-            cursor: pointer;
-            background: linear-gradient(90deg, var(--accent), var(--accent2));
-            color: #fff;
-            transition: 0.25s ease;
         }
 
-        .btn.ghost {
-            background: transparent;
-            border: 1px solid var(--glass);
+        .lead {
+            margin: 0;
+            font-size: 14px;
             color: var(--muted);
         }
 
@@ -115,72 +89,89 @@
             display: none;
         }
 
-        main {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+        .btn {
+            padding: 10px 14px;
+            border-radius: 12px;
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            background: var(--primary);
+            color: #fff;
+        }
+
+        .btn.secondary {
+            background: #f2f2f7;
+            color: var(--text);
+        }
+
+        .btn-block {
+            width: 100%;
         }
 
         .card {
             background: var(--card);
-            border-radius: 16px;
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
             padding: 16px;
-            border: 1px solid var(--glass);
-            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.25);
-            transition: background var(--transition), color var(--transition);
+            margin-bottom: 16px;
+            box-shadow: var(--shadow);
         }
 
-        .drop {
-            min-height: 110px;
-            border-radius: var(--radius);
-            background: var(--glass);
-            border: 1px dashed var(--glass);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 12px;
-            color: var(--muted);
+        .dropzone {
+            padding: 30px;
             text-align: center;
+            border: 2px dashed var(--border);
+            border-radius: var(--radius);
+            color: var(--muted);
+            cursor: pointer;
         }
 
         .question {
-            font-size: 28px;
-            margin: 0 0 10px 0;
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 14px;
         }
 
         .options {
-            display: grid;
+            display: flex;
+            flex-direction: column;
             gap: 10px;
         }
 
-        .opt {
+        .option {
             padding: 14px;
             border-radius: 12px;
-            background: var(--glass);
+            border: 1px solid var(--border);
+            background: #fafafa;
             cursor: pointer;
-            border: 1px solid transparent;
-            transition: 0.25s ease;
         }
 
-        .opt:hover {
-            background: rgba(255, 255, 255, 0.06);
-        }
-
-        .opt.correct {
+        .option.correct {
             border-color: var(--success);
-            background: rgba(16, 185, 129, 0.15);
+            background: #e8fce8;
         }
 
-        .opt.wrong {
+        .option.wrong {
             border-color: var(--danger);
-            background: rgba(239, 68, 68, 0.15);
+            background: #ffecec;
         }
 
-        /* POPUP */
+        .nav-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+
+        .nav-row .btn {
+            flex: 1;
+            min-width: 100px;
+        }
+
+        /* ---------------- POPUP ------------------ */
         .overlay {
             position: fixed;
             inset: 0;
-            background: rgba(0, 0, 0, 0.55);
+            background: rgba(0, 0, 0, 0.45);
             display: none;
             align-items: center;
             justify-content: center;
@@ -189,202 +180,200 @@
 
         .modal {
             width: 90%;
-            max-width: 480px;
+            max-width: 420px;
             background: var(--card);
             padding: 18px;
-            border-radius: 16px;
-            border: 1px solid var(--glass);
+            border-radius: var(--radius);
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow);
         }
 
-        .modal .status {
-            font-size: 26px;
-            font-weight: 800;
+        .status {
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 10px;
         }
 
         .explain {
-            margin-top: 10px;
-            background: var(--glass);
+            background: #f7f7f7;
             padding: 12px;
             border-radius: 12px;
             color: var(--muted);
+            margin-bottom: 12px;
         }
 
         footer {
-            text-align: center;
-            font-size: 12px;
-            color: var(--muted);
             margin-top: 20px;
+            font-size: 13px;
+            color: var(--muted);
+            text-align: center;
         }
 
-        @media (max-width:450px) {
+        /* MOBILE FIXES */
+        @media(max-width:480px) {
             :root {
-                --font-base: 26px;
+                --font: 22px;
+            }
+
+            .option {
+                font-size: 20px;
             }
 
             .question {
-                font-size: 26px;
+                font-size: 22px;
             }
 
-            .opt {
-                font-size: 22px;
-                padding: 16px;
-            }
-
-            .modal .status {
-                font-size: 22px;
+            header {
+                flex-direction: column;
+                align-items: flex-start;
             }
         }
     </style>
 </head>
 
 <body>
-
-    <div class="shell">
+    <div class="container">
 
         <header>
             <div class="brand">
-                <div class="logo">QA</div>
+                <div class="logo">EN</div>
                 <div>
                     <h1>English MCQ Quiz</h1>
-                    <p class="lead">Upload CSV (question,opt1,opt2,opt3,opt4,answer,explanation)</p>
+                    <p class="lead">CSV: question,opt1,opt2,opt3,opt4,answer,explanation</p>
                 </div>
             </div>
 
-            <div class="controls">
-                <label class="btn ghost">Upload CSV
+            <div>
+                <label class="btn secondary">Upload CSV
                     <input id="fileInput" type="file" accept=".csv,text/csv">
                 </label>
-
-                <button class="btn" id="startBtn">Start</button>
-
-                <!-- THEME TOGGLE -->
-                <button class="btn ghost" id="themeToggle">🌙</button>
             </div>
         </header>
 
-        <main>
-            <div class="card">
-                <div class="drop" id="dropzone">
-                    Drop CSV here or tap <strong>Upload CSV</strong>
-                </div>
+        <div class="card dropzone" id="dropzone">
+            Tap here or “Upload CSV” to select a file
+        </div>
+
+        <div class="card" id="quizCard" style="display:none;">
+            <div>
+                <strong id="qIndex">0</strong> / <span id="qTotal">0</span>
             </div>
 
-            <div class="card" id="quizCard" style="display:none">
-                <div class="meta">
-                    <div>Question <strong id="qIndex">0</strong> / <span id="qTotal">0</span></div>
-                </div>
+            <div class="question" id="questionText"></div>
 
-                <h2 class="question" id="questionText">Question will appear here</h2>
-                <div class="options" id="options"></div>
+            <div class="options" id="options"></div>
 
-                <div style="margin-top:12px; display:flex; justify-content:space-between;">
-                    <button class="btn ghost" id="prevBtn">Prev</button>
-                    <button class="btn ghost" id="nextBtn">Next</button>
-                    <button class="btn" id="finishBtn">Finish</button>
-                </div>
+            <div class="nav-row">
+                <button class="btn secondary" id="prevBtn">Prev</button>
+                <button class="btn secondary" id="nextBtn">Next</button>
+                <button class="btn" id="finishBtn">Finish</button>
             </div>
+        </div>
 
-            <div class="card" id="resultCard" style="display:none">
-                <h3>Your Score</h3>
-                <div id="scoreDisplay" style="font-size:24px; font-weight:700;">0 / 0</div>
-            </div>
+        <div class="card" id="resultCard" style="display:none;">
+            <h2>Results</h2>
+            <div id="scoreDisplay" style="font-size:22px; font-weight:700;"></div>
+        </div>
 
-        </main>
-
-        <footer>English MCQ Quiz • Mobile Friendly</footer>
+        <footer>English Quiz • Pure White Version</footer>
     </div>
 
-    <!-- Popup -->
+    <!-- POPUP -->
     <div class="overlay" id="overlay">
         <div class="modal">
             <div class="status" id="modalStatus"></div>
             <div class="explain" id="modalExplanation"></div>
-            <div style="margin-top:12px; text-align:right;">
-                <button class="btn" id="modalNext">Next Question</button>
-            </div>
+            <button class="btn btn-block" id="modalNext">Next</button>
         </div>
     </div>
 
     <script>
-        /* THEME TOGGLE */
-        const themeToggle = document.getElementById("themeToggle");
-        function updateThemeIcon() {
-            themeToggle.textContent = document.documentElement.classList.contains("light") ? "🌙" : "☀️";
-        }
-        themeToggle.addEventListener("click", () => {
-            document.documentElement.classList.toggle("light");
-            updateThemeIcon();
-        });
-        updateThemeIcon();
+        /* ------------------------------------
+           Selector helper (unique)
+        -------------------------------------*/
+        const $$ = (sel) => document.querySelector(sel);
 
-        /* CSV Handling */
-        const $ = (s) => document.querySelector(s);
+        /* Elements */
+        const fileInput = $$("#fileInput");
+        const dropzone = $$("#dropzone");
+        const quizCard = $$("#quizCard");
+        const resultCard = $$("#resultCard");
+        const qIndex = $$("#qIndex");
+        const qTotal = $$("#qTotal");
+        const questionText = $$("#questionText");
+        const optionsEl = $$("#options");
+        const overlay = $$("#overlay");
+        const modalStatus = $$("#modalStatus");
+        const modalExplanation = $$("#modalExplanation");
+        const modalNext = $$("#modalNext");
 
         let questions = [];
-        let state = { idx: 0 };
+        let idx = 0;
+        let score = 0;
 
-        const fileInput = $("#fileInput");
-        const dropzone = $("#dropzone");
-        const quizCard = $("#quizCard");
-        const resultCard = $("#resultCard");
-        const questionText = $("#questionText");
-        const optionsEl = $("#options");
-        const qIndex = $("#qIndex");
-        const qTotal = $("#qTotal");
-
-        const overlay = $("#overlay");
-        const modalStatus = $("#modalStatus");
-        const modalExplanation = $("#modalExplanation");
-        const modalNext = $("#modalNext");
-
+        /* ---------------------------
+           FILE INPUT HANDLER
+        ----------------------------*/
         fileInput.addEventListener("change", async (e) => {
             const text = await e.target.files[0].text();
             loadCSV(text);
         });
 
-        dropzone.addEventListener("dragover", (e) => e.preventDefault());
-        dropzone.addEventListener("drop", async (e) => {
-            e.preventDefault();
-            const text = await e.dataTransfer.files[0].text();
-            loadCSV(text);
-        });
+        dropzone.addEventListener("click", () => fileInput.click());
 
         function loadCSV(text) {
             const rows = text.trim().split("\n").map(r => r.split(","));
+
             questions = rows.slice(1).map(r => ({
-                question: r[0],
-                options: [r[1], r[2], r[3], r[4]],
-                answer: r[5],
-                explanation: r[6]
+                q: r[0],
+                opts: [r[1], r[2], r[3], r[4]],
+                ans: r[5],
+                exp: r[6]
             }));
 
+            idx = 0;
+            score = 0;
+
             qTotal.textContent = questions.length;
+
             quizCard.style.display = "block";
             resultCard.style.display = "none";
+
             render();
         }
 
+        /* ---------------------------
+           RENDER QUESTION
+        ----------------------------*/
         function render() {
-            const q = questions[state.idx];
-            qIndex.textContent = state.idx + 1;
-            questionText.textContent = q.question;
-            optionsEl.innerHTML = "";
+            const q = questions[idx];
 
-            q.options.forEach(opt => {
+            qIndex.textContent = idx + 1;
+            questionText.textContent = q.q;
+
+            optionsEl.innerHTML = "";
+            q.opts.forEach(opt => {
                 const div = document.createElement("div");
-                div.className = "opt";
+                div.className = "option";
                 div.textContent = opt;
                 div.onclick = () => onSelect(opt);
                 optionsEl.appendChild(div);
             });
         }
 
+        /* ---------------------------
+           SELECT OPTION
+        ----------------------------*/
         function onSelect(opt) {
-            const q = questions[state.idx];
-            let correct = opt === q.answer;
+            const q = questions[idx];
+            const correct = opt === q.ans;
+
+            if (correct) score++;
 
             modalStatus.textContent = correct ? "Correct!" : "Incorrect";
-            modalExplanation.textContent = q.explanation || "No explanation available.";
+            modalStatus.style.color = correct ? "#34c759" : "#ff3b30";
+
+            modalExplanation.textContent = q.exp || "No explanation provided.";
 
             overlay.style.display = "flex";
         }
@@ -394,33 +383,38 @@
             next();
         };
 
+        /* ---------------------------
+           NAVIGATION
+        ----------------------------*/
         function next() {
-            if (state.idx < questions.length - 1) {
-                state.idx++;
+            if (idx < questions.length - 1) {
+                idx++;
                 render();
             } else {
                 finish();
             }
         }
 
-        $("#nextBtn").onclick = next;
-        $("#prevBtn").onclick = () => {
-            if (state.idx > 0) {
-                state.idx--;
+        $$("#nextBtn").onclick = next;
+
+        $$("#prevBtn").onclick = () => {
+            if (idx > 0) {
+                idx--;
                 render();
             }
         };
 
-        $("#finishBtn").onclick = finish;
+        $$("#finishBtn").onclick = finish;
 
         function finish() {
             quizCard.style.display = "none";
             resultCard.style.display = "block";
 
-            $("#scoreDisplay").textContent =
-                `Completed: ${questions.length} questions`;
+            $$("#scoreDisplay").textContent =
+                `Score: ${score} / ${questions.length}`;
         }
     </script>
+
 </body>
 
 </html>
